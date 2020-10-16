@@ -73,13 +73,13 @@ app.delete('/api/candidate/:id', (req, res) => {
 
 // Create a candidate
 app.post('/api/candidate', ({body}) => {
-    const errors = inputCheck(body, 'first_name', 'last_name', 'industry_standard');
+    const errors = inputCheck(body, 'first_name', 'last_name', 'industry_connected');
     if (errors) {
-        res.status(400).json({error: errors});
+        res.status(400).json({error: err.mesage});
         return;
     }
 
-    const sql = `INSET INTO candidates (first_name, last_name, industry_standard)
+    const sql = `INSET INTO candidates (first_name, last_name, industry_connected)
                 VALUES (?,?,?)`;
     const params = [body.first_name, body.last_name, body.industry_standard];
     // ES5 function, not arrow function, to use 'this'
